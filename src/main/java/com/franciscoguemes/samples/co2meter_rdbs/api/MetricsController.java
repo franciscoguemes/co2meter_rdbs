@@ -3,6 +3,11 @@ package com.franciscoguemes.samples.co2meter_rdbs.api;
 import com.franciscoguemes.samples.co2meter_rdbs.dto.MetricsDTO;
 import com.franciscoguemes.samples.co2meter_rdbs.model.Metrics;
 import com.franciscoguemes.samples.co2meter_rdbs.service.MetricsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +30,16 @@ public class MetricsController {
         this.metricsService = metricsService;
     }
 
+
+    @Operation(
+            summary = "Get the metrics of a sensor by its UUID",
+            description = "Get the metrics of the given sensor whose UUID is provided is the URL"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Metrics of the given sensor were found",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MetricsDTO.class))}),
+            @ApiResponse(responseCode = "404", description = "There are no metrics for the UUID (Sensor)",
+                    content = @Content)})
     @GetMapping
     public MetricsDTO getMetrics(@PathVariable("uuid") UUID uuid) {
         Optional<Metrics> metrics = this.metricsService.getMetrics(uuid);
