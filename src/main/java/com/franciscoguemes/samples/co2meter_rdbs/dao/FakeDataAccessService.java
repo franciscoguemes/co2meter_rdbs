@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository("fakeDao")
-public class FakeMeasurementDataAccessService implements MeasurementDao, MetricsDao, SensorDao {
+public class FakeDataAccessService implements MeasurementDao, MetricsDao, SensorDao {
 
     public static final int THIRTY = 30;
     private static final List<Measurement> DB = new ArrayList<>();
@@ -36,21 +36,6 @@ public class FakeMeasurementDataAccessService implements MeasurementDao, Metrics
                 .filter(m -> m.uuid().equals(uuid) && m.time().after(xDaysAgo))
                 .sorted()
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public ArrayList<Measurement> getLatest4Measurements(UUID uuid) {
-        ArrayList<Measurement> latestFour = new ArrayList<>(4);
-
-        List<Measurement> measurements = DB.stream()
-                .filter(m -> m.uuid().equals(uuid))
-                .sorted()
-                .collect(Collectors.toList());
-
-        measurements = measurements.reversed().stream().limit(4).collect(Collectors.toList());
-        latestFour.addAll(measurements.reversed().stream().toList());
-
-        return latestFour;
     }
 
     @Override
