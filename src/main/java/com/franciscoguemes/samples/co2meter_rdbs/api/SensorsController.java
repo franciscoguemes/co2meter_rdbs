@@ -22,11 +22,11 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/sensors/{uuid}")
 @RestController
-public class SensorController {
+public class SensorsController {
 
     private final SensorService sensorService;
 
-    public SensorController(SensorService sensorService) {
+    public SensorsController(SensorService sensorService) {
         this.sensorService = sensorService;
     }
 
@@ -37,6 +37,8 @@ public class SensorController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Information of the given sensor were found",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MetricsDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "There given sensor (UUID) is not valid",
+                    content = @Content),
             @ApiResponse(responseCode = "404", description = "There given sensor (UUID) does not exists",
                     content = @Content)})
     @GetMapping

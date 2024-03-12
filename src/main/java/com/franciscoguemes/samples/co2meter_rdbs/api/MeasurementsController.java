@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 
 @RequestMapping("api/v1/sensors/{uuid}/measurements")
 @RestController
-public class MeasurementController {
+public class MeasurementsController {
 
     private final MeasurementService measurementService;
 
 
     @Autowired
-    public MeasurementController(MeasurementService measurementService) {
+    public MeasurementsController(MeasurementService measurementService) {
         this.measurementService = measurementService;
     }
 
@@ -39,7 +39,9 @@ public class MeasurementController {
             @ApiResponse(responseCode = "200",
                     description = "The measurement was stored",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MeasurementDTO.class))}
-            )
+            ),
+            @ApiResponse(responseCode = "400", description = "There given UUID is not valid",
+                    content = @Content),
     })
     @PostMapping()
     public void addMeasurement(@PathVariable("uuid") UUID uuid, @NonNull @RequestBody MeasurementDTO measurementDTO) {
@@ -54,7 +56,7 @@ public class MeasurementController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Measurements of the given sensor were found",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MeasurementDTO.class))}),
-            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+            @ApiResponse(responseCode = "400", description = "There given UUID is not valid",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "There are no measurments for that UUID (Sensor)",
                     content = @Content)})

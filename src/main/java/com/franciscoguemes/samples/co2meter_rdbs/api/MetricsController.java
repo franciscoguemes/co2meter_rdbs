@@ -38,6 +38,8 @@ public class MetricsController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Metrics of the given sensor were found",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MetricsDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "There given UUID is not valid",
+                    content = @Content),
             @ApiResponse(responseCode = "404", description = "There are no metrics for the UUID (Sensor)",
                     content = @Content)})
     @GetMapping
