@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: co2meter_rdbs
+spring-doc:
+  api-docs:
+    path: /api/v1/api-docs
+  swagger-ui:
+    path: /api/v1/swagger-ui/index.html
+
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/co2meter
+    username: postgres
+    password: password
+    pool-size: 30

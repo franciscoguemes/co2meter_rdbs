@@ -15,7 +15,7 @@ public class MeasurementService {
     private final MeasurementDao measurementDao;
 
     @Autowired
-    public MeasurementService(@Qualifier("fakeDao") MeasurementDao measurementDao) {
+    public MeasurementService(@Qualifier("postgresDao") MeasurementDao measurementDao) {
         this.measurementDao = measurementDao;
     }
 

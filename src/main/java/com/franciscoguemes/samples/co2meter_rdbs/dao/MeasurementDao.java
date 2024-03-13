@@ -10,6 +10,4 @@ public interface MeasurementDao {
 
     List<Measurement> getAllMeasurements(UUID uuid);
 
-    List<Measurement> getLast30DaysMeasurements(UUID uuid);
-
 }
