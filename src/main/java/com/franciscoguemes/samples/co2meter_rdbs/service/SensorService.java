@@ -15,7 +15,7 @@ public class SensorService {
     private final SensorDao sensorDao;
 
     @Autowired
-    public SensorService(@Qualifier("postgresDao") SensorDao sensorDao) {
+    public SensorService(@Qualifier("${app.das}") SensorDao sensorDao) {
         this.sensorDao = sensorDao;
     }
 

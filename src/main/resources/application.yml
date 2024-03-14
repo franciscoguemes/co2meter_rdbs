@@ -1,15 +1,31 @@
 spring:
   application:
     name: co2meter_rdbs
+  profiles:
+    active: dev
 spring-doc:
   api-docs:
     path: /api/v1/api-docs
   swagger-ui:
     path: /api/v1/swagger-ui/index.html
 
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
 app:
+  das: postgresDao
   datasource:
     jdbc-url: jdbc:postgresql://localhost:5432/co2meter
     username: postgres
     password: password
     pool-size: 30
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+app:
+  das: fakeDao

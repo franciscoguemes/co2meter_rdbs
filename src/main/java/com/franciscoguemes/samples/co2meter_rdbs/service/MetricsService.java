@@ -16,7 +16,7 @@ public class MetricsService {
     private final MetricsDao metricsDao;
 
     @Autowired
-    public MetricsService(@Qualifier("postgresDao") MetricsDao metricsDao) {
+    public MetricsService(@Qualifier("${app.das}") MetricsDao metricsDao) {
         this.metricsDao = metricsDao;
     }
 

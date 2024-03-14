@@ -14,8 +14,9 @@ public class MeasurementService {
 
     private final MeasurementDao measurementDao;
 
+
     @Autowired
-    public MeasurementService(@Qualifier("postgresDao") MeasurementDao measurementDao) {
+    public MeasurementService(@Qualifier("${app.das}") MeasurementDao measurementDao) {
         this.measurementDao = measurementDao;
     }
 
