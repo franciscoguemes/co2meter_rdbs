@@ -4,8 +4,8 @@ import com.franciscoguemes.samples.co2meter_rdbs.model.Measurement;
 import com.franciscoguemes.samples.co2meter_rdbs.model.Metrics;
 import org.springframework.stereotype.Repository;
 
-import java.time.Duration;
-import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,10 +30,10 @@ public class FakeDataAccessService extends AbstractDataAccessService {
     }
 
     private List<Measurement> getLast30DaysMeasurements(UUID uuid) {
-        Date xDaysAgo = Date.from(Instant.now().minus(Duration.ofDays(THIRTY)));
+        OffsetDateTime xDaysAgo = OffsetDateTime.now(ZoneOffset.UTC).minusDays(THIRTY);
 
         return DB.stream()
-                .filter(m -> m.uuid().equals(uuid) && m.time().after(xDaysAgo))
+                .filter(m -> m.uuid().equals(uuid) && m.time().isAfter(xDaysAgo))
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -50,7 +50,7 @@ public class FakeDataAccessService extends AbstractDataAccessService {
         Iterator<Measurement> it = measurements.iterator();
         while (it.hasNext()) {
             Measurement m = it.next();
-            max = m.co2() > max ? m.co2() : max;
+            max = Math.max(m.co2(), max);
             sumTotal += m.co2();
         }
         int avg = sumTotal / measurements.size();
