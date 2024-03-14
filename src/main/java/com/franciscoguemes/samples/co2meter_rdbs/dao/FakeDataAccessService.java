@@ -16,9 +16,9 @@ public class FakeDataAccessService extends AbstractDataAccessService {
     private static final List<Measurement> DB = new ArrayList<>();
 
     @Override
-    public int insertMeasurement(Measurement measurement) {
+    public Measurement insertMeasurement(Measurement measurement) {
         DB.add(measurement);
-        return 1;
+        return measurement;
     }
 
     @Override

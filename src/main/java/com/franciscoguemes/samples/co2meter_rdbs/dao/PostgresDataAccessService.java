@@ -22,9 +22,10 @@ public class PostgresDataAccessService extends AbstractDataAccessService {
     }
 
     @Override
-    public int insertMeasurement(Measurement measurement) {
+    public Measurement insertMeasurement(Measurement measurement) {
         String sql = "INSERT INTO measurement VALUES(?,?,?)";
-        return this.jdbcTemplate.update(sql, measurement.uuid(), measurement.time(), measurement.co2());
+        this.jdbcTemplate.update(sql, measurement.uuid(), measurement.time(), measurement.co2());
+        return measurement;
     }
 
     @Override

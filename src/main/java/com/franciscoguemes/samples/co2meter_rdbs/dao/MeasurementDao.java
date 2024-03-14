@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MeasurementDao {
-    int insertMeasurement(Measurement measurement);
+    Measurement insertMeasurement(Measurement measurement);
 
     List<Measurement> getAllMeasurements(UUID uuid);
 

@@ -44,8 +44,9 @@ public class MeasurementsController {
                     content = @Content),
     })
     @PostMapping()
-    public void addMeasurement(@PathVariable("uuid") UUID uuid, @NonNull @RequestBody MeasurementDTO measurementDTO) {
-        measurementService.addMeasurement(new Measurement(uuid, measurementDTO.co2(), measurementDTO.time()));
+    public MeasurementDTO addMeasurement(@PathVariable("uuid") UUID uuid, @NonNull @RequestBody MeasurementDTO measurementDTO) {
+        Measurement measurement = measurementService.addMeasurement(new Measurement(uuid, measurementDTO.co2(), measurementDTO.time()));
+        return new MeasurementDTO(measurement.co2(), measurement.time());
     }
 
 

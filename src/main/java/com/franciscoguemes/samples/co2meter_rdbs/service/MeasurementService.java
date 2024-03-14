@@ -20,7 +20,7 @@ public class MeasurementService {
         this.measurementDao = measurementDao;
     }
 
-    public int addMeasurement(Measurement measurement) {
+    public Measurement addMeasurement(Measurement measurement) {
         return measurementDao.insertMeasurement(measurement);
     }
 
