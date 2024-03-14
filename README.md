@@ -8,6 +8,7 @@ thousands of sensors and alert if the CO2 concentrations reach critical levels.
 - [Introduction](#introduction)
 - [Functional requirments](#functional-requirements)
 - [API Specifications](#api-specifications)
+- [Technical documentation](#technical-documentation)
 
 # Introduction
 
@@ -80,6 +81,12 @@ Response:
    "avgLast30Days" : 900
 }
 ```
+
+---
+
+# Technical Documentation
+
+The technical documentation of the application is under the directory `doc`.
 
 ---
 
