@@ -34,6 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MeasurementsControllerIntegrationTest {
 
 
+    public static final String MEASUREMENTS_URL = "/api/v1/sensors/{uuid}/measurements";
     @Autowired
     private MockMvc mvc;
 
@@ -57,7 +58,9 @@ class MeasurementsControllerIntegrationTest {
         given(measurementService.addMeasurement(Mockito.any())).willReturn(measurement);
 
 
-        mvc.perform(post("/api/v1/sensors/{uuid}/measurements", uuid).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(measurementDTO))).andExpect(status().isOk()).andExpect(jsonPath("$.co2", is(2000)));
+        mvc.perform(post("/api/v1/sensors/{uuid}/measurements", uuid).contentType(MediaType.APPLICATION_JSON).content(JsonUtil.toJson(measurementDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.co2", is(2000)));
         verify(measurementService, VerificationModeFactory.times(1)).addMeasurement(Mockito.any());
         reset(measurementService);
     }
@@ -74,7 +77,7 @@ class MeasurementsControllerIntegrationTest {
 
         given(measurementService.getMeasurementsOf(Mockito.any())).willReturn(allMeasurements);
 
-        mvc.perform(get("/api/v1/sensors/{uuid}/measurements", uuid).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get(MEASUREMENTS_URL, uuid).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].co2", is(2000)))
